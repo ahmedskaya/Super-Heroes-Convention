@@ -35,9 +35,11 @@
   <body ng-app="starter">
     <ion-pane ng-controller="ListController">
       <ion-header-bar class="bar-dark" align-title="center">
-        <button class="button button icon ion-minus-circle" ng-click="data.showReorder = !data.showReorder"></button>
+        <button class="button button icon ion-minus-circled" ng-click="data.showDelete = !data.showDelete; data.showReorder = false;">
+        </button>
         <h2 class="title">Artist List</h2>
-        <button class="button button icon ion-drag" ng-click="data.showDelete = !data.showDelete; data.showReorder = false;"></button>
+        <button class="button button icon ion-drag" ng-click="data.showReorder = !data.showReorder; data.showDelete = false;">
+        </button>
       </ion-header-bar>
       <div class="bar bar-subheader item-input-inset bar-light">
         <label class="item-input-wrapper">
@@ -46,8 +48,9 @@
         </label>
       </div>
       <ion-content class="has-subheader">
-        <ion-list show-reorder="data.showReorder">
+        <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
           <ion-item ng-repeat="item in artists | filter: query" class="item-thumbnail-left item-text-wrap">
+            <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
             <img src="img/{{item.shortname}}_tn.jpg" alt="{{item.name}}photo">
             <h2>{{item.name}}</h2>
             <h3>{{item.reknown}}</h3>
